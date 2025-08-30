@@ -760,4 +760,4 @@ class tspn(object):
         axList[1].legend(loc='upper left')
         axList[1].plot(1000, 2, '.', color='white', linestyle='-', zorder=-1, alpha=1)
 
-        plt.savefig(savePrefix+'ellCTuned_VR.png', dpi=300, bbox_inches='tight')
+        plt.savefig(savePrefix+'CellTuned_VR.png', dpi=300, bbox_inches='tight')
