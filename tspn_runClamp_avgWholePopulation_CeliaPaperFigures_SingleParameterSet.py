@@ -34,7 +34,7 @@ t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostISt
 ###########################
 # Input resistance changes with gLeak gA
 t.autoHold = True; t.holdingCurrentOrHoldingVoltageIfAutoHold = -68
-t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"IRChangesAt-68mV_asInData_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=True)
+t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"IRChangesAt-68mV_asInData_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=False)
 ###########################
 ##############################################################################################################
 
@@ -66,7 +66,7 @@ abfLocation = "CeliaData/L39 (8-21-2018)-20210426T193143Z-001/L39 (8-21-2018)/18
 rowsToPlot = [0, 1, 3, 4, 5, 6, 7, 8, 9]; rowHeights = [3,5,1,1,1,1,1,1,1];
 vClampStepsStartingValues=np.array([-80, -80, -90, 10, -80])-t.junctionPotentialAdjustment; vClampStepsEndingValues=np.array([-80, -90, 10, -80, -80])-t.junctionPotentialAdjustment;
 t.stepSizeAbf = 0.1  # ms   #check data resolution #After TTX
-t.voltageClampRamp(vClampStepsDurations=np.array([2000, 1000, 4000, 4000, 2000]), vClampStepsStartingValues=vClampStepsStartingValues,vClampStepsEndingValues=vClampStepsEndingValues, rowsToPlot = rowsToPlot, rowHeights = rowHeights, plotFirstCompartmentV=False, plotOverlappingCurrents=False, plotAbf=True,abfLocation=abfLocation, abfOffset=660 + 2000 - 1172.57, plotGDestination=True, plotSamplingRate=plotSamplingRate, savePrefix=savePrefix)
+t.voltageClampRamp(vClampStepsDurations=np.array([2000, 1000, 4000, 4000, 2000]), vClampStepsStartingValues=vClampStepsStartingValues,vClampStepsEndingValues=vClampStepsEndingValues, rowsToPlot = rowsToPlot, rowHeights = rowHeights, plotFirstCompartmentV=False, plotOverlappingCurrents=False, plotAbf=False,abfLocation=abfLocation, abfOffset=660 + 2000 - 1172.57, plotGDestination=True, plotSamplingRate=plotSamplingRate, savePrefix=savePrefix)
 ###########################
 ###########################
 # Current clamp with EPSPs
@@ -136,7 +136,7 @@ for i,rate in enumerate(rates):
 rowsToPlot = [0, 1]; rowHeights = [5, 2];
 t.stepSize = modelStepSize; plotSamplingRate = modelPlotSamplingRate;
 t.autoHold = True; t.holdingCurrentOrHoldingVoltageIfAutoHold = -68
-t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"IRChangesAt-68mV_asInData_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=True)
+t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"IRChangesAt-68mV_asInData_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=False)
 ###########################
 ###########################
 # Current clamp to 0pA to measure RMP - Celia's RMP for cell is about -50mV; Avg is about -60mV
@@ -144,7 +144,7 @@ rowsToPlot = [0, 1]; rowHeights = [5, 2];
 t.stepSize = modelStepSize; plotSamplingRate = modelPlotSamplingRate;
 t.holdingCurrentOrHoldingVoltageIfAutoHold = 0;
 t.autoHold=False;
-t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"RMP_IR_tau_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=True)
+t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"RMP_IR_tau_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=False)
 ###########################
 ###############################################################################################################
 
