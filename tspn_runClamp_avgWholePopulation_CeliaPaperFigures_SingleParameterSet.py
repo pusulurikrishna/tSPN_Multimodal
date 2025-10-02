@@ -18,9 +18,10 @@ G_Destination = [34, 2*11954250, 1.25*82.8, 8.0, 2*2, 3, 1.5*43.7, 1.5*0.23, 1.5
 G_GLeakChangesOnly = [34, 11954250, 82.8, 8.0, 2, 3, 43.7, 0.23, 3*0.115, 81, 26.3, 13.44, 0.7, 296, 0, 0.0, 0.7];
 G_GNaGAChangesOnly = [34, 3*11954250, 82.8, 8.0, 2, 3, 3*43.7, 0.23, 0.115, 81, 26.3, 13.44, 0.7, 296, 0, 0.0, 0.7];
 
+
 ## Blue to red curves as we go from G to G_Destination
 ## All the below parameters tuned to avg NPY+ cells.
-
+#"""
 ##############################################################################################################
 # Figure: IR changes rheobase - gLeak changes - Current clamp
 # IR is dependent mainly on gA, GLeak and gH - not only gLeak but for demonstration of IR changes using Gleak
@@ -146,5 +147,24 @@ t.autoHold=False;
 t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=3, IStepIncrease=-10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix+"RMP_IR_tau_", plotSamplingRate=plotSamplingRate, plotFICurve=False, plotAbf=True)
 ###########################
 ###############################################################################################################
+
+#"""
+###############################################################################################################
+## For FI curves only
+ChronicG_FI   =     [34, 45000000, 180, 6., 0.5, 2., 190, 1., 0.5, 110, 10+5+5+5+1.3, 13.44, 0.7, 296, 4*10000, 4*0.1 , 0.28];
+ShamG_Destination_FI   =     [34, 3*45000000, 2.5*180, 6., 0.5, 2., 1.6*190, 1., 3*0.5, 1.3*110, 10+5+5+5+1.3, 13.44, 0.7, 296, 4*10000, 4*0.1 , 0.28];
+##############################################################################################################
+# The following CC, VR, EPSP, IR CC, RMP CC are for chronic vs sham parameters
+savePrefix = 'CeliaPaperOutput_'+str(modelStepSize)+'/FICurves_chronicVsShamChanges_';
+# Create cell
+t = tspn_ClampProtocol_Wrapper.tspn(stepSize, stepSizeAbf, -70, ChronicG_FI, autoHold=True, G_Destination=ShamG_Destination_FI, noOfGsToPlot=2)
+t.stepSize = modelStepSize; plotSamplingRate = modelPlotSamplingRate;
+###########################
+# Current clamp
+rowsToPlot = [0, 1]; rowHeights = [5, 2];
+t.currentClampStep(startOfFirstIStep=5000, durationOfIStep=3000, durationPostIStep=12000, durationLast=0 * 50000, numberOfISteps=13, IStepIncrease=10, rowsToPlot=rowsToPlot, rowHeights=rowHeights, saveData=True, savePrefix=savePrefix, plotSamplingRate=plotSamplingRate)
+###########################
+###############################################################################################################
+
 
 plt.show()

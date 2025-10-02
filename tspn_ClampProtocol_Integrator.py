@@ -481,7 +481,7 @@ def step(y, clampValue, gmax, dt, ccOrVc=True, Gsyn = 0):
     #P = 0; Am=0;   # removes any affect of pump; #P = 1000; Am = 0.001; #Am controls the change in conc. due to ion channels; P controls change in conc. due to pump
     # at holding potential, make sure it keeps [Na+], [K+] at default internal levels
     Jp = Pump_P * power(Nai/Nao,3);
-    Nai_next = Nai + dt * (-Pump_Am/F) * ((gNa + 0.21875*Gleak)*(V-E_Na) + 3*Jp) / Q10tauFactor;
+    Nai_next = Nai + dt * (-Pump_Am/F) * ((gNa + (ELeakMultiplier/1.28)*Gleak)*(V-E_Na) + 3*Jp) / Q10tauFactor;
             # d(nai) / dt = (-Am / F) * (INa_all + 3Jp)
             #             = () * (gNa*(V-  (R*T/F) * log(Nao/Nai)) + 3*Pump_P*power(Nai/Nao,3));
             #                   Too complex to solve
@@ -489,7 +489,7 @@ def step(y, clampValue, gmax, dt, ccOrVc=True, Gsyn = 0):
             # if d(mh/dt) = k; what are mh_inf and tau_mh? both infinity in this case, what's mh_next? just mh+k*dt?   so d(mh/dt) = (mh_inf-mh)/tau = k ==> mh_inf = k*tau = infiity
             # ==> mh_next = mh + limit(x->0) (k/x)(1-e^(-dt*x) --> L-Hospital rule derivatives top bottom -->
             # ==> mh_next = mh + k*dt -- same as regular euler.. so it should be okay to use regular euler here?
-    Ki_next = Ki + dt * (-Pump_Am / F) * ((gK + gA + gM + gKCa + 0.78125*Gleak) * (V - E_K) - 2 * Jp) / Q10tauFactor;
+    Ki_next = Ki + dt * (-Pump_Am / F) * ((gK + gA + gM + gKCa + (1/1.28)*Gleak) * (V - E_K) - 2 * Jp) / Q10tauFactor;
     I_pump = -(-3 * Jp + 2 * Jp);     # Since outgoing current is +ve
             # Not exponential Euler -- how to change to exp. Euler from regular Euler in this case?
                     # See above with Nai limits and L'Hospital rule -- so
